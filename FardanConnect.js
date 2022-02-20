@@ -1460,7 +1460,116 @@ Fardan.sendMessage(from, sendBtnVeryy, MessageType.buttonsMessage, {quoted:ftrol
     
      
        //── 「 Maker Fitur 」 ──//       
-        
+        case 'shopee':
+if (args.length == 0) return reply(`Nama Barang Yg Mau Di Cari Mana Tod\nContoh: ${prefix + command} sepatu`)
+query = args.join(" ")
+get_result = await fetchJson(`https://api.lolhuman.xyz/api/shopee?apikey=${settings.lolkey}&query=${query}`)
+get_result = get_result.result
+ini_txt = 'Shopee Search : \n'
+for (var x of get_result) {
+ini_txt += `Name : ${x.name}\n`
+ini_txt += `Terjual : ${x.sold}\n`
+ini_txt += `Stock : ${x.stock}\n`
+ini_txt += `Lokasi : ${x.shop_loc}\n`
+ini_txt += `Link : ${x.link_produk}\n\n`
+}
+reply(ini_txt)
+break
+case 'google2':
+if (args.length == 0) return reply(`Nama Yg Mau Cari Mana Tod\nContoh: ${prefix + command} sandrinna`)
+query = args.join(" ")
+get_result = await fetchJson(`https://api.lolhuman.xyz/api/gsearch?apikey=${settings.lolkey}&query=${query}`)
+get_result = get_result.result
+ini_txt = 'Google Search : \n'
+for (var x of get_result) {
+ini_txt += `Title : ${x.title}\n`
+ini_txt += `Link : ${x.link}\n`
+ini_txt += `Desc : ${x.desc}\n\n`
+}
+reply(ini_txt)
+break
+
+//==================[ RANDOM ]==================//
+case 'cuaca':
+								
+if (arg.length < 1) return reply('Masukan nama kota!')
+			
+	tekss = body.slice(7)
+				  
+	 anu = await fetchJson(`http://api.lolhuman.xyz/api/cuaca/${tekss}?apikey=${lolkey}`)
+			
+	 	   teks = `*╚❏* *CUACA*\n*╠❏*\n*╠❏* *Kota:* ${anu.result.tempat}\n*╠❏* *Cuaca:* ${anu.result.cuaca}\n*╠❏* *Suhu:* @${anu.result.suhu}\n*╠❏* *Kelembapan:* ${anu.result.kelembapan}\n*╠❏* *Angin:* ${anu.result.angin}\n*╠❏* *Latitude:* ${anu.result.latitude}\n*╚❏* *Longitude:* ${anu.result.longitude}`
+      
+	 	                reply(teks)
+		
+	 	                break
+	
+	 	                	
+	 	                		case 'covidindo':
+		
+				  				   anu = await fetchJson(`http://api.lolhuman.xyz/api/corona/indonesia?apikey=${lolkey}`)
+		
+				  				    p = anu.result
+	
+				  				    
+				  				       teks = `*╚❏* *INFO COVID*\n*╠❏*\n*╠❏* *Positif:* ${p.positif}\n*╠❏* *Sembuh:* ${p.sembuh}\n*╠❏* *Meninggoy:* ${p.meninggal}\n*╚❏* *Dirawat:* ${p.dirawat}`
+               
+	 	   	       reply(teks)
+	
+	 		   	       	break
+case 'artinama':
+if (args.length == 0) return reply(`Namamya Mana Tod\nContoh: ${prefix + command} Fax`)
+ini_nama = args.join(" ")
+get_result = await fetchJson(`https://api.lolhuman.xyz/api/artinama?apikey=${settings.lolkey}&nama=${ini_nama}`)
+reply(get_result.result)
+break
+case 'doaharian':
+		
+		   anu = await fetchJson(`https://cililitan2.herokuapp.com/api/muslim/doaharian?apikey=adadeh`)
+	
+		   			   teks = `*DOA HARIAN*\n\n`
+		
+		   			   		   for (let o of anu.result.data) {
+		
+		   			   		   			  teks += `*${o.title}*\n*Arab:* ${o.arabic}\n*Latin:* ${o.latin}\n*Terjemah:* ${o.translation}\n=============================\n`
+				
+		   			   		   			     }
+				  
+ reply(teks)
+		
+	    break
+		
+	 case 'doatahlil':
+anu = await fetchJson(`https://cililitan2.herokuapp.com/api/muslim/tahlil`)
+teks = `*DOA TAHLIL*\n\n`
+
+ for (let o of anu.result.data) {
+
+teks += `*${o.title}*\n*Arab:* ${o.arabic}\n*Terjemah:* ${o.translation}\n=============================\n`
+
+ }
+				  
+		 reply(teks)
+		
+	 break
+		
+	 	    case 'bacaanshalat':
+	
+	  	    	case 'bacaansholat':
+	
+				   anu = await fetchJson(`https://cililitan2.herokuapp.com/api/muslim/bacaanshalat`)
+		
+	   		   teks = `*BACAAN SHALAT*\n\n`
+				
+for (let o of anu.result) {
+			
+teks += `*${o.name}*\n*Arab:* ${o.arabic}\n*Latin:* ${o.latin}\n*Terjemah:* ${o.translation}\n=============================\n`
+	
+   }
+			
+  	   reply(teks)
+		
+  	   break
 case 'neon':
                 
                 if (!arg) return reply(from, `Penggunaan ${prefix}neon Fardan`, mek)
@@ -1499,7 +1608,7 @@ case 'logo1':
                         Fardan.sendMessage(from, gambar, image, {thumbnail: Buffer.alloc(0), caption: `Nih Kak!`, quoted : mek})
                     })
                     break		
-                    		
+
 case '3d':
                 
                     if (args.length == 0) return reply(`Contoh: ${prefix + command} Fax Chan`)
